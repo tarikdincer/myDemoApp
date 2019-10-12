@@ -47,7 +47,7 @@ public class AppTest
     public void testNotEqual() {
         ArrayList<String> array = new ArrayList<>(Arrays.asList("computer", "shoes", "hair", "comb"));
         ArrayList<String> array2 = new ArrayList<>(Arrays.asList("counter", "jack", "man", "rose"));
-        assertTrue(new App().isEqualLength(array,array2,2,1));
+        assertFalse(new App().isEqualLength(array,array2,1,1));
         }
 
     public void testEmptyArrayList() {
