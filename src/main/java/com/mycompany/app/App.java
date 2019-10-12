@@ -45,12 +45,13 @@ public class App
     String input = sc1.next().replaceAll("\\s","");
     inputList1.add(input);
     }
+    System.out.println(inputList1);
     
     String input2 = req.queryParams("input2");
     java.util.Scanner sc2 = new java.util.Scanner(input2);
     sc2.useDelimiter("[;\r\n]+");
     java.util.ArrayList<String> inputList2 = new java.util.ArrayList<>();
-    while (sc1.hasNext())
+    while (sc2.hasNext())
     {
     String input_2 = sc2.next().replaceAll("\\s","");
     inputList2.add(input_2);
