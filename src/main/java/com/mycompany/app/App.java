@@ -14,21 +14,24 @@ import spark.template.mustache.MustacheTemplateEngine;
  *
  */
 public class App 
-{
-    public static boolean search(ArrayList<Integer> array, int e) {
-        System.out.println("inside search");
-        if (array == null) return false;
-        for (int elt : array) {
-        if (elt == e) return true;
-        }
-        return false;
+{       
+    public static boolean isEqualLength(ArrayList<String> arr1, ArrayList<String> arr2, int x, int y) {
+        
+        if(arr1.size() == 0 || arr2.size() == 0 || x > arr1.size()-1 || y > arr2.size())
+            return false;
+
+        if(arr1.get(x).length() == arr2.get(y).length())
+            return true;
+
+        else
+            return false;
     }
     
     
 
     public static void main( String[] args )
     {
-        port(getHerokuAssignedPort());
+    port(getHerokuAssignedPort());
     get("/", (req, res) -> "Hello, World");
     post("/compute", (req, res) -> {
     //System.out.println(req.queryParams("input1"));
@@ -36,16 +39,31 @@ public class App
     String input1 = req.queryParams("input1");
     java.util.Scanner sc1 = new java.util.Scanner(input1);
     sc1.useDelimiter("[;\r\n]+");
-    java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
+    java.util.ArrayList<String> inputList1 = new java.util.ArrayList<>();
     while (sc1.hasNext())
     {
-    int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
-    inputList.add(value);
+    String input = sc1.next().replaceAll("\\s","");
+    inputList1.add(input);
     }
-    System.out.println(inputList);
-    String input2 = req.queryParams("input2").replaceAll("\\s","");
-    int input2AsInt = Integer.parseInt(input2);
-    boolean result = App.search(inputList, input2AsInt);
+    
+    String input2 = req.queryParams("input2");
+    java.util.Scanner sc2 = new java.util.Scanner(input2);
+    sc2.useDelimiter("[;\r\n]+");
+    java.util.ArrayList<String> inputList2 = new java.util.ArrayList<>();
+    while (sc1.hasNext())
+    {
+    String input_2 = sc2.next().replaceAll("\\s","");
+    inputList2.add(input_2);
+    }
+    System.out.println(inputList2);
+
+    String input3 = req.queryParams("input3").replaceAll("\\s","");
+    int input3AsInt = Integer.parseInt(input3);
+    
+    String input4 = req.queryParams("input4").replaceAll("\\s","");
+    int input4AsInt = Integer.parseInt(input4);
+
+    boolean result = App.isEqualLength(inputList1, inputList2, input3AsInt, input4AsInt);
     Map map = new HashMap();
     map.put("result", result);
     return new ModelAndView(map, "compute.mustache");
